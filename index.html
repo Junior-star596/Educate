@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Educate – Aprendiendo a Leer 🌟</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <!-- ========== PANTALLA DE BIENVENIDA ========== -->
+  <div id="welcome-screen" class="welcome-screen">
+    <div class="welcome-box">
+      <div class="welcome-logo">📚</div>
+      <h1 class="welcome-title">Educate</h1>
+      <p class="welcome-subtitle">¡Bienvenido a aprender a leer!</p>
+      <div class="name-form">
+        <label class="name-label" for="name-input">¿Cómo te llamas?</label>
+        <input
+          type="text"
+          id="name-input"
+          class="name-input"
+          placeholder="Escribe tu nombre..."
+          maxlength="20"
+          autocomplete="off"
+        />
+        <button class="btn btn-primary btn-welcome" onclick="submitName()">
+          ¡Empezar! 🚀
+        </button>
+      </div>
+    </div>
+    <div class="bubble b1">⭐</div>
+    <div class="bubble b2">🌈</div>
+    <div class="bubble b3">🎉</div>
+    <div class="bubble b4">✏️</div>
+    <div class="bubble b5">📖</div>
+  </div>
+
+  <!-- ========== SELECTOR DE ACTIVIDADES ========== -->
+  <div id="activity-selector" class="hidden">
+
+    <header class="main-header">
+      <div class="header-inner">
+        <div class="logo">
+          <span class="logo-icon">📚</span>
+          <span class="logo-text">Educate</span>
+        </div>
+        <div class="user-info">
+          <span class="user-avatar">🧒</span>
+          <span id="user-name-display" class="user-name">Hola!</span>
+        </div>
+        <div class="stars-display">
+          <span class="star-icon">⭐</span>
+          <span id="total-stars">0</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="selector-content">
+      <h2 class="selector-title">¿Qué quieres aprender hoy?</h2>
+      <div class="activity-cards-grid">
+        <div class="act-card" style="--c:#FF6B6B;--cs:#FF8E53" onclick="launchActivity('completa')">
+          <div class="act-card-icon">✏️</div>
+          <div class="act-card-name">Completa</div>
+        </div>
+        <div class="act-card" style="--c:#4ECDC4;--cs:#26A69A" onclick="launchActivity('oracion')">
+          <div class="act-card-icon">💬</div>
+          <div class="act-card-name">Oraciones</div>
+        </div>
+        <div class="act-card" style="--c:#FFD700;--cs:#FFA000" onclick="launchActivity('ordenar')">
+          <div class="act-card-icon">🔀</div>
+          <div class="act-card-name">Ordenar</div>
+        </div>
+        <div class="act-card" style="--c:#A78BFA;--cs:#7C3AED" onclick="launchActivity('lee')">
+          <div class="act-card-icon">🎤</div>
+          <div class="act-card-name">Lee</div>
+        </div>
+        <div class="act-card" style="--c:#F97316;--cs:#EA580C" onclick="launchActivity('abecedario')">
+          <div class="act-card-icon">🔤</div>
+          <div class="act-card-name">ABC</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== PANTALLA DE ACTIVIDAD ========== -->
+  <div id="app-screen" class="hidden">
+
+    <header class="main-header">
+      <div class="header-inner">
+        <button class="back-btn" onclick="goToSelector()">← Inicio</button>
+        <div class="logo">
+          <span class="logo-icon">📚</span>
+          <span class="logo-text">Educate</span>
+        </div>
+        <div class="stars-display">
+          <span class="star-icon">⭐</span>
+          <span id="total-stars-app">0</span>
+        </div>
+      </div>
+    </header>
+
+    <main class="content-area">
+
+      <!-- ===== ACTIVIDAD: COMPLETA ===== -->
+      <section id="completa" class="activity-section">
+        <div class="section-header" style="--accent:#FF6B6B">
+          <h2>✏️ Completa la Palabra</h2>
+          <p>¡Elige la sílaba que falta!</p>
+        </div>
+        <div class="progress-bar-wrap">
+          <div class="progress-bar" id="completa-progress"></div>
+        </div>
+        <div class="card activity-card">
+          <div class="word-puzzle" id="word-puzzle"></div>
+          <p class="instruction-text" id="completa-instruction">¿Qué sílaba falta?</p>
+          <div class="options-grid" id="completa-options"></div>
+          <div class="feedback" id="completa-feedback"></div>
+        </div>
+        <div class="score-badge">⭐ <span id="completa-score">0</span> pts</div>
+      </section>
+
+      <!-- ===== ACTIVIDAD: ORACIONES ===== -->
+      <section id="oracion" class="activity-section">
+        <div class="section-header" style="--accent:#4ECDC4">
+          <h2>💬 Completa la Oración</h2>
+          <p>¡Elige la palabra que falta!</p>
+        </div>
+        <div class="progress-bar-wrap">
+          <div class="progress-bar" id="oracion-progress"></div>
+        </div>
+        <div class="card activity-card">
+          <p class="sentence-text" id="sentence-text"></p>
+          <div class="options-grid" id="oracion-options"></div>
+          <div class="feedback" id="oracion-feedback"></div>
+        </div>
+        <div class="score-badge">⭐ <span id="oracion-score">0</span> pts</div>
+      </section>
+
+      <!-- ===== ACTIVIDAD: ORDENAR ===== -->
+      <section id="ordenar" class="activity-section">
+        <div class="section-header" style="--accent:#FFD700">
+          <h2>🔀 Ordena la Oración</h2>
+          <p>¡Arrastra las palabras en el orden correcto!</p>
+        </div>
+        <div class="card activity-card">
+          <p class="instruction-text">Arrastra las palabras para formar la oración:</p>
+          <div class="word-bank" id="word-bank"></div>
+          <div class="drop-zone-label">↓ Suelta aquí ↓</div>
+          <div class="drop-zone" id="drop-zone"
+               ondragover="allowDrop(event)"
+               ondrop="dropWord(event)"
+               ondragleave="dragLeave(event)">
+          </div>
+          <div class="ordenar-actions">
+            <button class="btn btn-secondary" onclick="resetOrdenar()">🔄 Reiniciar</button>
+            <button class="btn btn-primary" onclick="checkOrdenar()">✔ Verificar</button>
+          </div>
+          <div class="feedback" id="ordenar-feedback"></div>
+        </div>
+        <div class="score-badge">⭐ <span id="ordenar-score">0</span> pts</div>
+      </section>
+
+      <!-- ===== ACTIVIDAD: LEE ===== -->
+      <section id="lee" class="activity-section">
+        <div class="section-header" style="--accent:#A78BFA">
+          <h2>🎤 Lee en Voz Alta</h2>
+          <p>¡Lee la oración que ves!</p>
+        </div>
+        <div class="card activity-card">
+          <div class="voz-sentence-box">
+            <p id="voz-sentence" class="voz-sentence-text"></p>
+          </div>
+          <button class="mic-btn" id="mic-btn" onclick="startListening()">
+            <span class="mic-icon">🎤</span>
+            <span id="mic-label">Presiona y Lee</span>
+          </button>
+          <div class="listening-animation" id="listening-anim">
+            <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+            <div class="bar"></div><div class="bar"></div>
+          </div>
+          <div id="voz-transcript" class="transcript-box"></div>
+          <div class="feedback" id="voz-feedback"></div>
+          <button class="btn btn-secondary mt-2" onclick="nextVozQuestion()">➡ Siguiente oración</button>
+        </div>
+        <div class="score-badge">⭐ <span id="voz-score">0</span> pts</div>
+      </section>
+
+      <!-- ===== ACTIVIDAD: ABECEDARIO ===== -->
+      <section id="abecedario" class="activity-section">
+        <div class="section-header" style="--accent:#F97316">
+          <h2>🔤 El Abecedario</h2>
+          <p>¡Haz clic en la letra para escucharla!</p>
+        </div>
+        <div class="card activity-card abc-card">
+          <div class="abc-nav">
+            <button class="abc-arrow" onclick="prevLetter()">◀</button>
+            <div class="abc-display">
+              <div class="abc-letter" id="abc-letter" onclick="speakLetter()">A</div>
+            </div>
+            <button class="abc-arrow" onclick="nextLetter()">▶</button>
+          </div>
+          <div class="abc-image-box">
+            <div class="abc-emoji" id="abc-emoji">🌳</div>
+            <p class="abc-word" id="abc-word">Árbol</p>
+          </div>
+          <button class="btn btn-primary abc-speak-btn" onclick="speakLetter()">
+            🔊 Escuchar la letra
+          </button>
+          <div class="abc-dots" id="abc-dots"></div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ========== MODAL DE CELEBRACIÓN ========== -->
+  <div class="celebration-modal" id="celebration-modal">
+    <div class="celebration-content">
+      <div class="celebration-emoji" id="celebration-emoji">🌟</div>
+      <h2 id="celebration-title">¡Excelente!</h2>
+      <p id="celebration-msg">¡Ganaste una estrella!</p>
+      <button class="btn btn-primary" onclick="closeCelebration()">¡Continuar! 🚀</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

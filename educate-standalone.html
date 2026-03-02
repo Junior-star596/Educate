@@ -1,0 +1,1673 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Educate – Aprendiendo a Leer 🌟</title>
+  <style>
+/* =====================================================
+   EDUCATE – Estilos principales
+   ===================================================== */
+
+:root {
+  --color-bg: #FFF9F0;
+  --color-primary: #FF6B6B;
+  --color-secondary: #4ECDC4;
+  --color-accent: #FFE66D;
+  --color-purple: #A78BFA;
+  --color-orange: #F97316;
+  --color-green: #6BCB77;
+  --color-text: #2D2D2D;
+  --color-text-light: #666;
+  --radius-xl: 24px;
+  --radius-lg: 18px;
+  --shadow: 0 8px 32px rgba(0,0,0,0.10);
+  --shadow-btn: 0 4px 0px rgba(0,0,0,0.18);
+  --font-title: 'Fredoka One', cursive;
+  --font-body: 'Nunito', sans-serif;
+  --transition: all 0.25s cubic-bezier(.4,0,.2,1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--color-bg);
+  color: var(--color-text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.hidden { display: none !important; }
+
+/* ===== PANTALLA DE BIENVENIDA ===== */
+.welcome-screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 40%, #FFE66D 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.welcome-box {
+  background: #fff;
+  border-radius: 32px;
+  padding: 48px 40px 40px;
+  text-align: center;
+  max-width: 420px;
+  width: 90%;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.18);
+  position: relative;
+  z-index: 2;
+  animation: welcomePop 0.6s cubic-bezier(.34,1.56,.64,1);
+}
+
+@keyframes welcomePop {
+  from { transform: scale(0.7) translateY(40px); opacity: 0; }
+  to   { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+.welcome-logo {
+  font-size: 5rem;
+  margin-bottom: 8px;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
+}
+
+.welcome-title {
+  font-family: var(--font-title);
+  font-size: 3rem;
+  color: var(--color-primary);
+  text-shadow: 2px 3px 0 rgba(255,107,107,0.2);
+  margin-bottom: 6px;
+}
+
+.welcome-subtitle {
+  font-size: 1.1rem;
+  color: var(--color-text-light);
+  font-weight: 700;
+  margin-bottom: 28px;
+}
+
+.name-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: center;
+}
+
+.name-label {
+  font-family: var(--font-title);
+  font-size: 1.4rem;
+  color: var(--color-text);
+}
+
+.name-input {
+  width: 100%;
+  padding: 16px 20px;
+  font-family: var(--font-title);
+  font-size: 1.4rem;
+  text-align: center;
+  border: 3px solid #FFD0CC;
+  border-radius: 50px;
+  outline: none;
+  background: #FFF5F5;
+  color: var(--color-text);
+  transition: var(--transition);
+}
+
+.name-input:focus {
+  border-color: var(--color-primary);
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(255,107,107,0.15);
+}
+
+.btn-welcome {
+  width: 100%;
+  padding: 18px;
+  font-size: 1.3rem;
+  justify-content: center;
+}
+
+/* Burbujas decorativas flotantes */
+.bubble {
+  position: absolute;
+  font-size: 2.5rem;
+  animation: floatBubble linear infinite;
+  opacity: 0.7;
+  user-select: none;
+  pointer-events: none;
+}
+.b1 { left: 5%;  bottom: 10%; animation-duration: 7s;  animation-delay: 0s; }
+.b2 { right: 8%; bottom: 20%; animation-duration: 9s;  animation-delay: 1s; }
+.b3 { left: 15%; top: 15%;    animation-duration: 8s;  animation-delay: 2s; }
+.b4 { right: 5%; top: 10%;    animation-duration: 6s;  animation-delay: 0.5s; }
+.b5 { left: 40%; top: 5%;     animation-duration: 10s; animation-delay: 1.5s; }
+
+@keyframes floatBubble {
+  0%   { transform: translateY(0) rotate(0deg); }
+  50%  { transform: translateY(-30px) rotate(10deg); }
+  100% { transform: translateY(0) rotate(0deg); }
+}
+
+/* ===== SELECTOR DE ACTIVIDADES ===== */
+.selector-content {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 24px 16px 60px;
+}
+
+.selector-title {
+  font-family: var(--font-title);
+  font-size: 1.8rem;
+  text-align: center;
+  color: var(--color-text);
+  margin-bottom: 28px;
+  padding-top: 8px;
+}
+
+.activity-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+@media (max-width: 480px) {
+  .activity-cards-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+.act-card {
+  background: linear-gradient(135deg, var(--c), var(--cs));
+  border-radius: var(--radius-xl);
+  padding: 28px 16px 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  box-shadow: 0 6px 0 rgba(0,0,0,0.13);
+  transition: var(--transition);
+  border: none;
+  user-select: none;
+}
+
+.act-card:hover {
+  transform: translateY(-6px) scale(1.04);
+  box-shadow: 0 12px 0 rgba(0,0,0,0.13);
+}
+
+.act-card:active {
+  transform: translateY(0) scale(0.97);
+  box-shadow: 0 3px 0 rgba(0,0,0,0.13);
+}
+
+.act-card-icon { font-size: 3rem; }
+
+.act-card-name {
+  font-family: var(--font-title);
+  font-size: 1.2rem;
+  color: #fff;
+  text-shadow: 1px 2px 0 rgba(0,0,0,0.15);
+}
+
+/* ===== HEADER ===== */
+.main-header {
+  background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%);
+  padding: 14px 20px;
+  box-shadow: 0 4px 16px rgba(255,107,107,0.35);
+  position: sticky; top: 0; z-index: 100;
+}
+.header-inner {
+  max-width: 900px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+}
+.logo { display: flex; align-items: center; gap: 8px; }
+.logo-icon { font-size: 1.8rem; }
+.logo-text {
+  font-family: var(--font-title);
+  font-size: 1.8rem;
+  color: #fff;
+  text-shadow: 2px 3px 0 rgba(0,0,0,0.15);
+}
+.user-info {
+  display: flex; align-items: center; gap: 6px;
+  background: rgba(255,255,255,0.25);
+  border-radius: 50px;
+  padding: 6px 14px;
+}
+.user-avatar { font-size: 1.2rem; }
+.user-name {
+  font-family: var(--font-title);
+  font-size: 1.1rem;
+  color: #fff;
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.stars-display {
+  display: flex; align-items: center; gap: 6px;
+  background: rgba(255,255,255,0.25);
+  border-radius: 50px;
+  padding: 6px 14px;
+}
+.star-icon { font-size: 1.2rem; }
+#total-stars, #total-stars-app {
+  font-family: var(--font-title);
+  font-size: 1.4rem;
+  color: #fff;
+}
+
+.back-btn {
+  background: rgba(255,255,255,0.25);
+  border: none;
+  border-radius: 50px;
+  padding: 8px 16px;
+  font-family: var(--font-title);
+  font-size: 1rem;
+  color: #fff;
+  cursor: pointer;
+  transition: var(--transition);
+  white-space: nowrap;
+}
+.back-btn:hover { background: rgba(255,255,255,0.4); }
+
+/* ===== CONTENT AREA ===== */
+.content-area {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 10px 16px 60px;
+}
+
+/* ===== ACTIVITY SECTIONS ===== */
+.activity-section { display: none; animation: fadeSlideIn 0.4s ease; }
+.activity-section.active { display: block; }
+
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.section-header {
+  text-align: center;
+  padding: 20px 0 10px;
+}
+.section-header h2 {
+  font-family: var(--font-title);
+  font-size: 2rem;
+  color: var(--accent, var(--color-primary));
+}
+.section-header p {
+  font-size: 1.05rem;
+  color: var(--color-text-light);
+  margin-top: 4px;
+  font-weight: 600;
+}
+
+/* ===== PROGRESS BAR ===== */
+.progress-bar-wrap {
+  background: #e5e7eb;
+  border-radius: 50px;
+  height: 12px;
+  margin: 8px 0 14px;
+  overflow: hidden;
+}
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #FF6B6B, #FFE66D);
+  border-radius: 50px;
+  transition: width 0.5s ease;
+  width: 0%;
+}
+
+/* ===== CARD ===== */
+.card {
+  background: #fff;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow);
+  padding: 28px 24px;
+  margin-bottom: 16px;
+}
+
+.score-badge {
+  text-align: right;
+  font-family: var(--font-title);
+  font-size: 1.2rem;
+  color: var(--color-orange);
+  padding: 0 4px;
+}
+
+/* ===== WORD PUZZLE (Completa) ===== */
+/* Muestra la palabra con una sílaba vacía, en cualquier posición */
+.word-puzzle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  font-family: var(--font-title);
+  font-size: 3rem;
+  padding: 18px;
+  background: linear-gradient(135deg, #FFF9F0, #FFF0F0);
+  border-radius: var(--radius-lg);
+  border: 3px dashed #FFCDD2;
+  margin-bottom: 16px;
+  letter-spacing: 2px;
+}
+.puzzle-part { color: var(--color-text); }
+.puzzle-blank {
+  display: inline-block;
+  min-width: 70px;
+  background: #FFE4E4;
+  border-radius: 10px;
+  border-bottom: 4px solid #FF6B6B;
+  color: #FF6B6B;
+  text-align: center;
+  padding: 0 6px;
+  font-size: 2.8rem;
+}
+
+.instruction-text {
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-text-light);
+  margin-bottom: 20px;
+}
+
+/* ===== OPTIONS GRID ===== */
+.options-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-bottom: 16px;
+}
+.option-btn {
+  padding: 18px 10px;
+  font-family: var(--font-title);
+  font-size: 1.5rem;
+  border: 3px solid #e5e7eb;
+  border-radius: var(--radius-lg);
+  background: #fff;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: var(--shadow-btn);
+  color: var(--color-text);
+}
+.option-btn:hover:not(:disabled) {
+  transform: translateY(-4px) scale(1.04);
+  box-shadow: 0 8px 0 rgba(0,0,0,0.15);
+  border-color: var(--color-primary);
+}
+.option-btn.correct {
+  background: linear-gradient(135deg, #6BCB77, #52b560);
+  border-color: #52b560;
+  color: #fff;
+  animation: correctPop 0.5s ease;
+}
+.option-btn.wrong {
+  background: linear-gradient(135deg, #FF6B6B, #e55);
+  border-color: #e55;
+  color: #fff;
+  animation: shake 0.4s ease;
+}
+@keyframes correctPop {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+@keyframes shake {
+  0%,100% { transform: translateX(0); }
+  25%      { transform: translateX(-8px); }
+  75%      { transform: translateX(8px); }
+}
+
+/* ===== FEEDBACK ===== */
+.feedback {
+  text-align: center;
+  font-family: var(--font-title);
+  font-size: 1.4rem;
+  min-height: 40px;
+  padding: 8px 0;
+}
+.feedback.correct-msg { color: #6BCB77; }
+.feedback.wrong-msg   { color: #FF6B6B; }
+
+/* ===== SENTENCE (Oracion) ===== */
+.sentence-text {
+  font-family: var(--font-title);
+  font-size: 1.8rem;
+  text-align: center;
+  color: var(--color-text);
+  padding: 18px;
+  background: linear-gradient(135deg, #F0F9FF, #E0F7FA);
+  border-radius: var(--radius-lg);
+  border: 3px dashed #4ECDC4;
+  margin-bottom: 22px;
+  line-height: 1.5;
+}
+
+/* ===== DRAG & DROP (Ordenar) ===== */
+.word-bank {
+  display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;
+  padding: 18px;
+  background: #f9fafb;
+  border-radius: var(--radius-lg);
+  min-height: 68px;
+  margin-bottom: 12px;
+  border: 2px dashed #d1d5db;
+}
+.drag-word {
+  padding: 14px 22px;
+  background: linear-gradient(135deg, #FFE66D, #FFC107);
+  border: 3px solid #FFC107;
+  border-radius: 50px;
+  font-family: var(--font-title);
+  font-size: 1.2rem;
+  cursor: grab;
+  user-select: none;
+  box-shadow: var(--shadow-btn);
+  transition: var(--transition);
+  color: #333;
+}
+.drag-word:hover  { transform: translateY(-3px) scale(1.05); }
+.drag-word:active { cursor: grabbing; transform: scale(0.97); }
+.drag-word.dragging { opacity: 0.4; transform: scale(0.95); }
+
+.drop-zone-label {
+  text-align: center;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #aaa;
+  margin-bottom: 6px;
+}
+.drop-zone {
+  display: flex; flex-wrap: wrap; gap: 12px;
+  justify-content: center; align-items: center;
+  min-height: 80px;
+  border: 3px dashed #A78BFA;
+  border-radius: var(--radius-lg);
+  padding: 14px;
+  background: #FAF5FF;
+  transition: var(--transition);
+  margin-bottom: 16px;
+}
+.drop-zone.drag-over {
+  background: #EDE9FE;
+  border-color: #7C3AED;
+  transform: scale(1.01);
+}
+.ordenar-actions { display: flex; gap: 12px; justify-content: center; }
+
+/* ===== BOTONES ===== */
+.btn {
+  padding: 14px 28px;
+  border: none;
+  border-radius: 50px;
+  font-family: var(--font-title);
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: var(--shadow-btn);
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.btn:hover { transform: translateY(-3px); box-shadow: 0 8px 0 rgba(0,0,0,0.15); }
+.btn:active { transform: translateY(1px); box-shadow: 0 2px 0 rgba(0,0,0,0.15); }
+.btn-primary  { background: linear-gradient(135deg, #FF6B6B, #FF8E53); color: #fff; }
+.btn-secondary { background: #f3f4f6; color: #555; border: 2px solid #e5e7eb; }
+.mt-2 { margin-top: 14px; }
+
+/* ===== LEE (Voz) ===== */
+.voz-sentence-box {
+  background: linear-gradient(135deg, #F5F3FF, #EDE9FE);
+  border: 3px dashed #A78BFA;
+  border-radius: var(--radius-lg);
+  padding: 22px;
+  margin-bottom: 22px;
+  text-align: center;
+}
+.voz-sentence-text {
+  font-family: var(--font-title);
+  font-size: 1.8rem;
+  color: #5B21B6;
+  line-height: 1.5;
+}
+.mic-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #A78BFA, #7C3AED);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 110px; height: 110px;
+  font-family: var(--font-title);
+  font-size: 0.9rem;
+  cursor: pointer;
+  margin: 0 auto 16px;
+  box-shadow: 0 6px 0 rgba(124,58,237,0.35);
+  transition: var(--transition);
+}
+.mic-btn:hover { transform: translateY(-4px) scale(1.05); }
+.mic-btn.listening {
+  background: linear-gradient(135deg, #EF4444, #DC2626);
+  box-shadow: 0 0 0 6px rgba(239,68,68,0.25), 0 6px 0 rgba(185,28,28,0.4);
+  animation: pulse 1s infinite;
+}
+.mic-icon { font-size: 2.4rem; }
+
+@keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.08); } }
+
+.listening-animation {
+  display: none;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 5px;
+  height: 40px;
+  margin-bottom: 12px;
+}
+.listening-animation.show { display: flex; }
+.listening-animation .bar {
+  width: 8px;
+  background: linear-gradient(to top, #A78BFA, #7C3AED);
+  border-radius: 4px;
+  animation: bars 0.7s ease-in-out infinite;
+}
+.listening-animation .bar:nth-child(1) { animation-delay: 0s; }
+.listening-animation .bar:nth-child(2) { animation-delay: 0.1s; }
+.listening-animation .bar:nth-child(3) { animation-delay: 0.2s; }
+.listening-animation .bar:nth-child(4) { animation-delay: 0.1s; }
+.listening-animation .bar:nth-child(5) { animation-delay: 0s; }
+@keyframes bars { 0%,100% { height: 8px; } 50% { height: 36px; } }
+
+.transcript-box {
+  font-size: 1rem;
+  color: #6B7280;
+  text-align: center;
+  min-height: 28px;
+  font-style: italic;
+  margin-bottom: 8px;
+}
+
+/* ===== ABECEDARIO ===== */
+.abc-card { text-align: center; }
+.abc-nav {
+  display: flex; align-items: center; justify-content: center;
+  gap: 20px; margin-bottom: 16px;
+}
+.abc-arrow {
+  background: linear-gradient(135deg, #F97316, #FB923C);
+  color: #fff; border: none; border-radius: 50%;
+  width: 54px; height: 54px;
+  font-size: 1.4rem; cursor: pointer;
+  box-shadow: var(--shadow-btn); transition: var(--transition);
+  display: flex; align-items: center; justify-content: center;
+}
+.abc-arrow:hover { transform: scale(1.1); }
+.abc-letter {
+  font-family: var(--font-title);
+  font-size: 7rem;
+  color: var(--color-orange);
+  cursor: pointer;
+  display: inline-block;
+  width: 140px; height: 140px;
+  line-height: 140px;
+  border-radius: var(--radius-xl);
+  background: linear-gradient(135deg, #FFF7ED, #FFEDD5);
+  border: 4px solid #FED7AA;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+  animation: letterBounce 0.4s ease;
+  user-select: none;
+}
+.abc-letter:hover { transform: scale(1.08) rotate(-3deg); }
+@keyframes letterBounce {
+  0%   { transform: scale(0.7); opacity: 0; }
+  60%  { transform: scale(1.1); }
+  100% { transform: scale(1); opacity: 1; }
+}
+.abc-image-box {
+  padding: 16px; background: #f9fafb;
+  border-radius: var(--radius-lg); margin-bottom: 16px;
+  min-height: 100px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+}
+.abc-emoji { font-size: 4.5rem; animation: fadeSlideIn 0.3s ease; }
+.abc-word  { font-family: var(--font-title); font-size: 1.6rem; color: var(--color-orange); margin-top: 6px; }
+.abc-speak-btn { margin: 0 auto 16px; }
+.abc-dots { display: flex; justify-content: center; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+.abc-dot { width: 12px; height: 12px; border-radius: 50%; background: #e5e7eb; transition: var(--transition); cursor: pointer; }
+.abc-dot.active { background: var(--color-orange); transform: scale(1.4); }
+
+/* ===== MODAL CELEBRACIÓN ===== */
+.celebration-modal {
+  display: none;
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.45);
+  z-index: 200;
+  align-items: center; justify-content: center;
+  backdrop-filter: blur(3px);
+}
+.celebration-modal.show { display: flex; }
+.celebration-content {
+  background: #fff;
+  border-radius: var(--radius-xl);
+  padding: 40px 32px;
+  text-align: center;
+  max-width: 380px; width: 90%;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.25);
+  animation: celebrationPop 0.5s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes celebrationPop {
+  from { transform: scale(0.5); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+.celebration-emoji { font-size: 5rem; margin-bottom: 10px; animation: spin 0.6s ease; }
+@keyframes spin { from { transform: rotate(-30deg) scale(0.5); } to { transform: rotate(0) scale(1); } }
+.celebration-content h2 {
+  font-family: var(--font-title);
+  font-size: 2.2rem;
+  color: var(--color-primary);
+  margin-bottom: 8px;
+}
+.celebration-content p { font-size: 1.1rem; color: #555; margin-bottom: 20px; font-weight: 600; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 600px) {
+  .logo-text { font-size: 1.4rem; }
+  .section-header h2 { font-size: 1.5rem; }
+  .word-puzzle { font-size: 2.2rem; }
+  .puzzle-blank { font-size: 2rem; min-width: 55px; }
+  .options-grid { gap: 8px; }
+  .option-btn { font-size: 1.1rem; padding: 14px 6px; }
+  .sentence-text, .voz-sentence-text { font-size: 1.3rem; }
+  .abc-letter { font-size: 5rem; width: 110px; height: 110px; line-height: 110px; }
+  .abc-emoji { font-size: 3.5rem; }
+  .card { padding: 18px 14px; }
+  .mic-btn { width: 90px; height: 90px; }
+  .drag-word { padding: 10px 16px; font-size: 1rem; }
+  .welcome-box { padding: 36px 24px 30px; }
+  .welcome-title { font-size: 2.4rem; }
+  .act-card { padding: 22px 12px 18px; }
+  .act-card-icon { font-size: 2.4rem; }
+  .act-card-name { font-size: 1rem; }
+}
+
+</style>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <!-- ========== PANTALLA DE BIENVENIDA ========== -->
+  <div id="welcome-screen" class="welcome-screen">
+    <div class="welcome-box">
+      <div class="welcome-logo">📚</div>
+      <h1 class="welcome-title">Educate</h1>
+      <p class="welcome-subtitle">¡Bienvenido a aprender a leer!</p>
+      <div class="name-form">
+        <label class="name-label" for="name-input">¿Cómo te llamas?</label>
+        <input
+          type="text"
+          id="name-input"
+          class="name-input"
+          placeholder="Escribe tu nombre..."
+          maxlength="20"
+          autocomplete="off"
+        />
+        <button class="btn btn-primary btn-welcome" onclick="submitName()">
+          ¡Empezar! 🚀
+        </button>
+      </div>
+    </div>
+    <div class="bubble b1">⭐</div>
+    <div class="bubble b2">🌈</div>
+    <div class="bubble b3">🎉</div>
+    <div class="bubble b4">✏️</div>
+    <div class="bubble b5">📖</div>
+  </div>
+
+  <!-- ========== SELECTOR DE ACTIVIDADES ========== -->
+  <div id="activity-selector" class="hidden">
+
+    <header class="main-header">
+      <div class="header-inner">
+        <div class="logo">
+          <span class="logo-icon">📚</span>
+          <span class="logo-text">Educate</span>
+        </div>
+        <div class="user-info">
+          <span class="user-avatar">🧒</span>
+          <span id="user-name-display" class="user-name">Hola!</span>
+        </div>
+        <div class="stars-display">
+          <span class="star-icon">⭐</span>
+          <span id="total-stars">0</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="selector-content">
+      <h2 class="selector-title">¿Qué quieres aprender hoy?</h2>
+      <div class="activity-cards-grid">
+        <div class="act-card" style="--c:#FF6B6B;--cs:#FF8E53" onclick="launchActivity('completa')">
+          <div class="act-card-icon">✏️</div>
+          <div class="act-card-name">Completa</div>
+        </div>
+        <div class="act-card" style="--c:#4ECDC4;--cs:#26A69A" onclick="launchActivity('oracion')">
+          <div class="act-card-icon">💬</div>
+          <div class="act-card-name">Oraciones</div>
+        </div>
+        <div class="act-card" style="--c:#FFD700;--cs:#FFA000" onclick="launchActivity('ordenar')">
+          <div class="act-card-icon">🔀</div>
+          <div class="act-card-name">Ordenar</div>
+        </div>
+        <div class="act-card" style="--c:#A78BFA;--cs:#7C3AED" onclick="launchActivity('lee')">
+          <div class="act-card-icon">🎤</div>
+          <div class="act-card-name">Lee</div>
+        </div>
+        <div class="act-card" style="--c:#F97316;--cs:#EA580C" onclick="launchActivity('abecedario')">
+          <div class="act-card-icon">🔤</div>
+          <div class="act-card-name">ABC</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== PANTALLA DE ACTIVIDAD ========== -->
+  <div id="app-screen" class="hidden">
+
+    <header class="main-header">
+      <div class="header-inner">
+        <button class="back-btn" onclick="goToSelector()">← Inicio</button>
+        <div class="logo">
+          <span class="logo-icon">📚</span>
+          <span class="logo-text">Educate</span>
+        </div>
+        <div class="stars-display">
+          <span class="star-icon">⭐</span>
+          <span id="total-stars-app">0</span>
+        </div>
+      </div>
+    </header>
+
+    <main class="content-area">
+
+      <!-- ===== ACTIVIDAD: COMPLETA ===== -->
+      <section id="completa" class="activity-section">
+        <div class="section-header" style="--accent:#FF6B6B">
+          <h2>✏️ Completa la Palabra</h2>
+          <p>¡Elige la sílaba que falta!</p>
+        </div>
+        <div class="progress-bar-wrap">
+          <div class="progress-bar" id="completa-progress"></div>
+        </div>
+        <div class="card activity-card">
+          <div class="word-puzzle" id="word-puzzle"></div>
+          <p class="instruction-text" id="completa-instruction">¿Qué sílaba falta?</p>
+          <div class="options-grid" id="completa-options"></div>
+          <div class="feedback" id="completa-feedback"></div>
+        </div>
+        <div class="score-badge">⭐ <span id="completa-score">0</span> pts</div>
+      </section>
+
+      <!-- ===== ACTIVIDAD: ORACIONES ===== -->
+      <section id="oracion" class="activity-section">
+        <div class="section-header" style="--accent:#4ECDC4">
+          <h2>💬 Completa la Oración</h2>
+          <p>¡Elige la palabra que falta!</p>
+        </div>
+        <div class="progress-bar-wrap">
+          <div class="progress-bar" id="oracion-progress"></div>
+        </div>
+        <div class="card activity-card">
+          <p class="sentence-text" id="sentence-text"></p>
+          <div class="options-grid" id="oracion-options"></div>
+          <div class="feedback" id="oracion-feedback"></div>
+        </div>
+        <div class="score-badge">⭐ <span id="oracion-score">0</span> pts</div>
+      </section>
+
+      <!-- ===== ACTIVIDAD: ORDENAR ===== -->
+      <section id="ordenar" class="activity-section">
+        <div class="section-header" style="--accent:#FFD700">
+          <h2>🔀 Ordena la Oración</h2>
+          <p>¡Arrastra las palabras en el orden correcto!</p>
+        </div>
+        <div class="card activity-card">
+          <p class="instruction-text">Arrastra las palabras para formar la oración:</p>
+          <div class="word-bank" id="word-bank"></div>
+          <div class="drop-zone-label">↓ Suelta aquí ↓</div>
+          <div class="drop-zone" id="drop-zone"
+               ondragover="allowDrop(event)"
+               ondrop="dropWord(event)"
+               ondragleave="dragLeave(event)">
+          </div>
+          <div class="ordenar-actions">
+            <button class="btn btn-secondary" onclick="resetOrdenar()">🔄 Reiniciar</button>
+            <button class="btn btn-primary" onclick="checkOrdenar()">✔ Verificar</button>
+          </div>
+          <div class="feedback" id="ordenar-feedback"></div>
+        </div>
+        <div class="score-badge">⭐ <span id="ordenar-score">0</span> pts</div>
+      </section>
+
+      <!-- ===== ACTIVIDAD: LEE ===== -->
+      <section id="lee" class="activity-section">
+        <div class="section-header" style="--accent:#A78BFA">
+          <h2>🎤 Lee en Voz Alta</h2>
+          <p>¡Lee la oración que ves!</p>
+        </div>
+        <div class="card activity-card">
+          <div class="voz-sentence-box">
+            <p id="voz-sentence" class="voz-sentence-text"></p>
+          </div>
+          <button class="mic-btn" id="mic-btn" onclick="startListening()">
+            <span class="mic-icon">🎤</span>
+            <span id="mic-label">Presiona y Lee</span>
+          </button>
+          <div class="listening-animation" id="listening-anim">
+            <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+            <div class="bar"></div><div class="bar"></div>
+          </div>
+          <div id="voz-transcript" class="transcript-box"></div>
+          <div class="feedback" id="voz-feedback"></div>
+          <button class="btn btn-secondary mt-2" onclick="nextVozQuestion()">➡ Siguiente oración</button>
+        </div>
+        <div class="score-badge">⭐ <span id="voz-score">0</span> pts</div>
+      </section>
+
+      <!-- ===== ACTIVIDAD: ABECEDARIO ===== -->
+      <section id="abecedario" class="activity-section">
+        <div class="section-header" style="--accent:#F97316">
+          <h2>🔤 El Abecedario</h2>
+          <p>¡Haz clic en la letra para escucharla!</p>
+        </div>
+        <div class="card activity-card abc-card">
+          <div class="abc-nav">
+            <button class="abc-arrow" onclick="prevLetter()">◀</button>
+            <div class="abc-display">
+              <div class="abc-letter" id="abc-letter" onclick="speakLetter()">A</div>
+            </div>
+            <button class="abc-arrow" onclick="nextLetter()">▶</button>
+          </div>
+          <div class="abc-image-box">
+            <div class="abc-emoji" id="abc-emoji">🌳</div>
+            <p class="abc-word" id="abc-word">Árbol</p>
+          </div>
+          <button class="btn btn-primary abc-speak-btn" onclick="speakLetter()">
+            🔊 Escuchar la letra
+          </button>
+          <div class="abc-dots" id="abc-dots"></div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ========== MODAL DE CELEBRACIÓN ========== -->
+  <div class="celebration-modal" id="celebration-modal">
+    <div class="celebration-content">
+      <div class="celebration-emoji" id="celebration-emoji">🌟</div>
+      <h2 id="celebration-title">¡Excelente!</h2>
+      <p id="celebration-msg">¡Ganaste una estrella!</p>
+      <button class="btn btn-primary" onclick="closeCelebration()">¡Continuar! 🚀</button>
+    </div>
+  </div>
+
+  <script>
+/* =====================================================
+   EDUCATE – script.js
+   ===================================================== */
+
+// ============================================================
+// ESTADO GLOBAL
+// ============================================================
+const state = {
+  playerName: '',
+  totalStars: 0,
+};
+
+// ============================================================
+// PANTALLA DE BIENVENIDA
+// ============================================================
+
+/** El niño escribe su nombre y pasa al selector de actividades */
+function submitName() {
+  const input = document.getElementById('name-input');
+  const name = input.value.trim();
+  if (!name) {
+    input.style.borderColor = '#FF6B6B';
+    input.placeholder = '¡Escribe tu nombre!';
+    input.focus();
+    return;
+  }
+  state.playerName = name;
+  document.getElementById('user-name-display').textContent = name;
+
+  // Animación de salida de bienvenida y aparición del selector
+  const ws = document.getElementById('welcome-screen');
+  ws.style.transition = 'opacity 0.4s';
+  ws.style.opacity = '0';
+  setTimeout(() => {
+    ws.classList.add('hidden');
+    document.getElementById('activity-selector').classList.remove('hidden');
+    // Guarda el nombre en la sesión para persistencia básica
+    try { sessionStorage.setItem('educate_name', name); } catch(e){}
+  }, 400);
+}
+
+/** Enter en el campo de nombre también envía */
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('name-input').addEventListener('keydown', e => {
+    if (e.key === 'Enter') submitName();
+  });
+
+  // Recupera nombre de sesión si ya existe (recarga de página)
+  try {
+    const saved = sessionStorage.getItem('educate_name');
+    if (saved) {
+      document.getElementById('name-input').value = saved;
+    }
+  } catch(e){}
+
+  // Inicializa todas las actividades
+  initCompleta();
+  initOracion();
+  initOrdenar();
+  initVoz();
+  initAbc();
+});
+
+// ============================================================
+// NAVEGACIÓN: SELECTOR ↔ ACTIVIDAD
+// ============================================================
+
+/** Lanza una actividad desde el selector */
+function launchActivity(actId) {
+  document.getElementById('activity-selector').classList.add('hidden');
+  document.getElementById('app-screen').classList.remove('hidden');
+
+  // Oculta todas las secciones y muestra la correcta
+  document.querySelectorAll('.activity-section').forEach(s => s.classList.remove('active'));
+  document.getElementById(actId).classList.add('active');
+
+  // Sincroniza estrellas
+  syncStars();
+}
+
+/** Vuelve al selector de actividades */
+function goToSelector() {
+  stopListening(); // Por si el micrófono estaba activo
+  document.getElementById('app-screen').classList.add('hidden');
+  document.getElementById('activity-selector').classList.remove('hidden');
+  syncStars();
+}
+
+/** Sincroniza el conteo de estrellas en ambos headers */
+function syncStars() {
+  document.getElementById('total-stars').textContent = state.totalStars;
+  document.getElementById('total-stars-app').textContent = state.totalStars;
+}
+
+// ============================================================
+// UTILIDADES
+// ============================================================
+
+function updateStars(count = 1) {
+  state.totalStars += count;
+  syncStars();
+}
+
+function showCelebration(emoji = '🌟', title = '¡Excelente!', msg = '') {
+  document.getElementById('celebration-emoji').textContent = emoji;
+  document.getElementById('celebration-title').textContent = title;
+  document.getElementById('celebration-msg').textContent = msg || `¡Muy bien, ${state.playerName}!`;
+  document.getElementById('celebration-modal').classList.add('show');
+}
+
+function closeCelebration() {
+  document.getElementById('celebration-modal').classList.remove('show');
+}
+
+function playSoundCorrect() {
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    [523, 659, 784].forEach((freq, i) => {
+      const osc  = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain); gain.connect(ctx.destination);
+      osc.frequency.value = freq; osc.type = 'sine';
+      gain.gain.setValueAtTime(0.3, ctx.currentTime + i * 0.12);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + i * 0.12 + 0.2);
+      osc.start(ctx.currentTime + i * 0.12);
+      osc.stop(ctx.currentTime + i * 0.12 + 0.25);
+    });
+  } catch(e) {}
+}
+
+function playSoundWrong() {
+  try {
+    const ctx  = new (window.AudioContext || window.webkitAudioContext)();
+    const osc  = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.connect(gain); gain.connect(ctx.destination);
+    osc.frequency.value = 200; osc.type = 'sawtooth';
+    gain.gain.setValueAtTime(0.2, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.3);
+    osc.start(); osc.stop(ctx.currentTime + 0.3);
+  } catch(e) {}
+}
+
+function speak(text, lang = 'es-ES') {
+  if (!window.speechSynthesis) return;
+  window.speechSynthesis.cancel();
+  const utt = new SpeechSynthesisUtterance(text);
+  utt.lang = lang; utt.rate = 0.85; utt.pitch = 1.2;
+  window.speechSynthesis.speak(utt);
+}
+
+// ============================================================
+// ACTIVIDAD 1: COMPLETA LA PALABRA
+//
+// Cada pregunta tiene:
+//   - `before`: texto antes del hueco (puede ser vacío → posición inicial)
+//   - `blank`:  la sílaba correcta que falta
+//   - `after`:  texto después del hueco (puede ser vacío → posición final)
+//   - `options`: las 3 opciones que se muestran
+//   - `hint`:   instrucción específica para el niño
+//
+// Se usan sílabas variadas (ma/mi/me/mo/mu, pa/pi/pe, ba/bi,
+// ca/co/cu, la/li/lo, to/ta, etc.) y la sílaba vacía puede
+// estar al inicio, en medio o al final de la palabra.
+// ============================================================
+const completaData = [
+  // ── Posición INICIAL ──
+  { before: '',    blank: 'ma',  after: 'no',   options: ['ma','pa','ba'], hint: '¿Con qué sílaba empieza?' },
+  { before: '',    blank: 'pa',  after: 'to',   options: ['ma','pa','ca'], hint: '¿Con qué sílaba empieza?' },
+  { before: '',    blank: 'ba',  after: 'lon',  options: ['ma','ba','la'], hint: '¿Con qué sílaba empieza?' },
+  { before: '',    blank: 'ca',  after: 'sa',   options: ['ca','pa','mi'], hint: '¿Con qué sílaba empieza?' },
+  { before: '',    blank: 'la',  after: 'ta',   options: ['la','ma','bi'], hint: '¿Con qué sílaba empieza?' },
+  { before: '',    blank: 'pi',  after: 'no',   options: ['pi','ti','mi'], hint: '¿Con qué sílaba empieza?' },
+  { before: '',    blank: 'so',  after: 'fa',   options: ['so','bo','to'], hint: '¿Con qué sílaba empieza?' },
+  { before: '',    blank: 'me',  after: 'sa',   options: ['me','le','se'], hint: '¿Con qué sílaba empieza?' },
+  { before: '',    blank: 'mu',  after: 'la',   options: ['mu','tu','su'], hint: '¿Con qué sílaba empieza?' },
+  // ── Posición MEDIA ──
+  { before: 'ca',  blank: 'ba',  after: 'llo',  options: ['ba','ma','la'], hint: '¿Qué sílaba va en el medio?' },
+  { before: 'ma',  blank: 'ri',  after: 'sa',   options: ['ri','li','ni'], hint: '¿Qué sílaba va en el medio?' },
+  { before: 'pa',  blank: 'lo',  after: 'ma',   options: ['lo','co','mo'], hint: '¿Qué sílaba va en el medio?' },
+  { before: 'bo',  blank: 'ni',  after: 'to',   options: ['ni','mi','si'], hint: '¿Qué sílaba va en el medio?' },
+  { before: 'co',  blank: 'ne',  after: 'jo',   options: ['ne','me','se'], hint: '¿Qué sílaba va en el medio?' },
+  { before: 'to',  blank: 'ma',  after: 'te',   options: ['ma','pa','ca'], hint: '¿Qué sílaba va en el medio?' },
+  { before: 'nu',  blank: 'be',  after: '',     options: ['be','pe','me'], hint: '¿Qué sílaba va al final?' },
+  // ── Posición FINAL ──
+  { before: 'pa',  blank: 'pa',  after: '',     options: ['pa','ma','ba'], hint: '¿Con qué sílaba termina?' },
+  { before: 'ca',  blank: 'ma',  after: '',     options: ['ma','la','ra'], hint: '¿Con qué sílaba termina?' },
+  { before: 'me',  blank: 'sa',  after: '',     options: ['sa','la','ta'], hint: '¿Con qué sílaba termina?' },
+  { before: 'lo',  blank: 'bo',  after: '',     options: ['bo','to','co'], hint: '¿Con qué sílaba termina?' },
+];
+
+let completaIndex = 0;
+let completaScore = 0;
+
+function initCompleta() {
+  completaIndex = 0;
+  completaScore = 0;
+  renderCompleta();
+}
+
+/** Construye visualmente la palabra con el hueco en su posición correcta */
+function renderCompleta() {
+  const q = completaData[completaIndex];
+
+  // Barra de progreso
+  document.getElementById('completa-progress').style.width =
+    (completaIndex / completaData.length * 100) + '%';
+
+  // Construye el puzzle: parte-antes + hueco + parte-después
+  const puzzle = document.getElementById('word-puzzle');
+  puzzle.innerHTML = '';
+
+  if (q.before) {
+    const b = document.createElement('span');
+    b.className = 'puzzle-part';
+    b.textContent = q.before;
+    puzzle.appendChild(b);
+  }
+
+  const blankEl = document.createElement('span');
+  blankEl.className = 'puzzle-blank';
+  blankEl.id = 'puzzle-blank';
+  blankEl.textContent = '___';
+  puzzle.appendChild(blankEl);
+
+  if (q.after) {
+    const a = document.createElement('span');
+    a.className = 'puzzle-part';
+    a.textContent = q.after;
+    puzzle.appendChild(a);
+  }
+
+  // Instrucción
+  document.getElementById('completa-instruction').textContent = q.hint;
+
+  // Opciones
+  const container = document.getElementById('completa-options');
+  container.innerHTML = '';
+  q.options.forEach(opt => {
+    const btn = document.createElement('button');
+    btn.className = 'option-btn';
+    btn.textContent = opt;
+    btn.onclick = () => checkCompleta(btn, opt, q.blank);
+    container.appendChild(btn);
+  });
+
+  document.getElementById('completa-feedback').textContent = '';
+  document.getElementById('completa-feedback').className = 'feedback';
+}
+
+function checkCompleta(btn, selected, correct) {
+  const allBtns = document.querySelectorAll('#completa-options .option-btn');
+  allBtns.forEach(b => b.disabled = true);
+
+  const feedback = document.getElementById('completa-feedback');
+
+  if (selected === correct) {
+    btn.classList.add('correct');
+    document.getElementById('puzzle-blank').textContent = correct;
+    document.getElementById('puzzle-blank').style.color = '#6BCB77';
+    document.getElementById('puzzle-blank').style.borderColor = '#6BCB77';
+    feedback.textContent = '🎉 ¡Correcto!';
+    feedback.className = 'feedback correct-msg';
+    playSoundCorrect();
+    completaScore += 10;
+    document.getElementById('completa-score').textContent = completaScore;
+
+    setTimeout(() => {
+      completaIndex++;
+      if (completaIndex < completaData.length) {
+        renderCompleta();
+      } else {
+        completaIndex = 0;
+        updateStars(3);
+        showCelebration('🌟', '¡Actividad completada!', `¡${state.playerName} obtuvo ${completaScore} puntos! +3 ⭐`);
+        completaScore = 0;
+        document.getElementById('completa-score').textContent = 0;
+        setTimeout(renderCompleta, 500);
+      }
+    }, 1200);
+  } else {
+    btn.classList.add('wrong');
+    feedback.textContent = '😅 ¡Inténtalo otra vez!';
+    feedback.className = 'feedback wrong-msg';
+    playSoundWrong();
+    setTimeout(() => {
+      btn.classList.remove('wrong');
+      allBtns.forEach(b => b.disabled = false);
+      feedback.textContent = '';
+      feedback.className = 'feedback';
+    }, 1000);
+  }
+}
+
+// ============================================================
+// ACTIVIDAD 2: COMPLETAR ORACIÓN
+// ============================================================
+const oracionData = [
+  { sentence: 'El perro come ______.', correct: 'comida',  options: ['casa', 'comida', 'azul'] },
+  { sentence: 'La luna brilla de ______.', correct: 'noche',   options: ['día', 'noche', 'mar'] },
+  { sentence: 'El niño juega en el ______.', correct: 'parque',  options: ['parque', 'libro', 'alto'] },
+  { sentence: 'Mamá cocina rica ______.', correct: 'sopa',    options: ['sopa', 'pelota', 'verde'] },
+  { sentence: 'El pájaro canta una ______.', correct: 'canción', options: ['canción', 'mesa', 'rojo'] },
+  { sentence: 'El bebé duerme en su ______.', correct: 'cama',    options: ['cama', 'árbol', 'correr'] },
+  { sentence: 'Papá lee un ______.', correct: 'libro',   options: ['libro', 'agua', 'feliz'] },
+];
+
+let oracionIndex = 0;
+let oracionScore  = 0;
+
+function initOracion() {
+  oracionIndex = 0;
+  oracionScore = 0;
+  renderOracion();
+}
+
+function renderOracion() {
+  const q = oracionData[oracionIndex];
+  document.getElementById('sentence-text').textContent = q.sentence;
+  document.getElementById('oracion-progress').style.width =
+    (oracionIndex / oracionData.length * 100) + '%';
+
+  const container = document.getElementById('oracion-options');
+  container.innerHTML = '';
+  q.options.forEach(opt => {
+    const btn = document.createElement('button');
+    btn.className = 'option-btn';
+    btn.textContent = opt;
+    btn.onclick = () => checkOracion(btn, opt, q.correct, q.sentence);
+    container.appendChild(btn);
+  });
+
+  document.getElementById('oracion-feedback').textContent = '';
+  document.getElementById('oracion-feedback').className = 'feedback';
+}
+
+function checkOracion(btn, selected, correct, sentence) {
+  const allBtns = document.querySelectorAll('#oracion-options .option-btn');
+  allBtns.forEach(b => b.disabled = true);
+  const feedback = document.getElementById('oracion-feedback');
+
+  if (selected === correct) {
+    btn.classList.add('correct');
+    document.getElementById('sentence-text').textContent =
+      sentence.replace('______', correct.toUpperCase());
+    feedback.textContent = '✅ ¡Correcto! ¡Brillante!';
+    feedback.className = 'feedback correct-msg';
+    playSoundCorrect();
+    oracionScore += 10;
+    document.getElementById('oracion-score').textContent = oracionScore;
+
+    setTimeout(() => {
+      oracionIndex++;
+      if (oracionIndex < oracionData.length) {
+        renderOracion();
+      } else {
+        oracionIndex = 0;
+        updateStars(3);
+        showCelebration('🏆', '¡Todas correctas!', `¡Increíble, ${state.playerName}! ${oracionScore} puntos +3 ⭐`);
+        oracionScore = 0;
+        document.getElementById('oracion-score').textContent = 0;
+        setTimeout(renderOracion, 500);
+      }
+    }, 1400);
+  } else {
+    btn.classList.add('wrong');
+    feedback.textContent = '❌ ¡Eso no es! Intenta otra opción.';
+    feedback.className = 'feedback wrong-msg';
+    playSoundWrong();
+    setTimeout(() => {
+      btn.classList.remove('wrong');
+      allBtns.forEach(b => b.disabled = false);
+      feedback.textContent = '';
+      feedback.className = 'feedback';
+    }, 1000);
+  }
+}
+
+// ============================================================
+// ACTIVIDAD 3: ORDENAR LA ORACIÓN (Drag & Drop)
+// ============================================================
+const ordenarData = [
+  { words: ['El', 'niño', 'juega', 'pelota'],  correct: 'El niño juega pelota' },
+  { words: ['La', 'gata', 'toma', 'leche'],    correct: 'La gata toma leche' },
+  { words: ['Papá', 'maneja', 'el', 'carro'],  correct: 'Papá maneja el carro' },
+  { words: ['Mi', 'mamá', 'canta', 'bonito'],  correct: 'Mi mamá canta bonito' },
+  { words: ['El', 'sol', 'brilla', 'hoy'],     correct: 'El sol brilla hoy' },
+];
+
+let ordenarIndex = 0;
+let ordenarScore  = 0;
+let currentOrdenar = null;
+let draggedEl = null;
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function initOrdenar() { renderOrdenar(); }
+
+function renderOrdenar() {
+  currentOrdenar = ordenarData[ordenarIndex];
+  const shuffled = shuffle(currentOrdenar.words);
+  const bank = document.getElementById('word-bank');
+  const zone = document.getElementById('drop-zone');
+  bank.innerHTML = ''; zone.innerHTML = '';
+  shuffled.forEach(word => bank.appendChild(createDragWord(word)));
+  document.getElementById('ordenar-feedback').textContent = '';
+  document.getElementById('ordenar-feedback').className = 'feedback';
+}
+
+function createDragWord(word) {
+  const el = document.createElement('div');
+  el.className = 'drag-word';
+  el.textContent = word;
+  el.draggable = true;
+  el.dataset.word = word;
+  el.addEventListener('dragstart', e => {
+    draggedEl = el;
+    el.classList.add('dragging');
+    e.dataTransfer.effectAllowed = 'move';
+  });
+  el.addEventListener('dragend', () => {
+    el.classList.remove('dragging');
+    draggedEl = null;
+  });
+  el.addEventListener('touchstart', touchStart, { passive: true });
+  el.addEventListener('touchend', touchEnd);
+  return el;
+}
+
+let touchOffsetX = 0, touchOffsetY = 0, touchClone = null;
+
+function touchStart(e) {
+  const touch = e.touches[0];
+  draggedEl = e.currentTarget;
+  const rect = draggedEl.getBoundingClientRect();
+  touchOffsetX = touch.clientX - rect.left;
+  touchOffsetY = touch.clientY - rect.top;
+  touchClone = draggedEl.cloneNode(true);
+  touchClone.style.cssText = `
+    position:fixed;z-index:9999;pointer-events:none;opacity:0.85;
+    width:${rect.width}px;left:${touch.clientX - touchOffsetX}px;
+    top:${touch.clientY - touchOffsetY}px;`;
+  document.body.appendChild(touchClone);
+  draggedEl.classList.add('dragging');
+  document.addEventListener('touchmove', touchMove, { passive: false });
+}
+
+function touchMove(e) {
+  e.preventDefault();
+  const touch = e.touches[0];
+  if (touchClone) {
+    touchClone.style.left = (touch.clientX - touchOffsetX) + 'px';
+    touchClone.style.top  = (touch.clientY - touchOffsetY) + 'px';
+  }
+  const zone = document.getElementById('drop-zone');
+  const rect = zone.getBoundingClientRect();
+  if (touch.clientX >= rect.left && touch.clientX <= rect.right &&
+      touch.clientY >= rect.top  && touch.clientY <= rect.bottom) {
+    zone.classList.add('drag-over');
+  } else {
+    zone.classList.remove('drag-over');
+  }
+}
+
+function touchEnd(e) {
+  document.removeEventListener('touchmove', touchMove);
+  if (touchClone) { document.body.removeChild(touchClone); touchClone = null; }
+  if (!draggedEl) return;
+  const touch = e.changedTouches[0];
+  const zone = document.getElementById('drop-zone');
+  const rect = zone.getBoundingClientRect();
+  zone.classList.remove('drag-over');
+  if (touch.clientX >= rect.left && touch.clientX <= rect.right &&
+      touch.clientY >= rect.top  && touch.clientY <= rect.bottom) {
+    zone.appendChild(draggedEl);
+  }
+  draggedEl.classList.remove('dragging');
+  draggedEl = null;
+}
+
+function allowDrop(e) { e.preventDefault(); e.currentTarget.classList.add('drag-over'); }
+function dragLeave(e) { e.currentTarget.classList.remove('drag-over'); }
+function dropWord(e)  { e.preventDefault(); e.currentTarget.classList.remove('drag-over'); if (draggedEl) document.getElementById('drop-zone').appendChild(draggedEl); }
+function resetOrdenar() { renderOrdenar(); }
+
+function checkOrdenar() {
+  const zone = document.getElementById('drop-zone');
+  const words = Array.from(zone.querySelectorAll('.drag-word')).map(el => el.dataset.word);
+  const feedback = document.getElementById('ordenar-feedback');
+
+  if (!words.length) {
+    feedback.textContent = '⬆ Arrastra las palabras a la zona de abajo';
+    feedback.className = 'feedback wrong-msg';
+    return;
+  }
+
+  if (words.join(' ') === currentOrdenar.correct) {
+    feedback.textContent = '🎊 ¡Oración correcta!';
+    feedback.className = 'feedback correct-msg';
+    playSoundCorrect();
+    zone.querySelectorAll('.drag-word').forEach(el => {
+      el.style.background = 'linear-gradient(135deg,#6BCB77,#52b560)';
+      el.style.color = '#fff'; el.style.borderColor = '#52b560';
+    });
+    ordenarScore += 15;
+    document.getElementById('ordenar-score').textContent = ordenarScore;
+    updateStars(1);
+    setTimeout(() => {
+      ordenarIndex = (ordenarIndex + 1) % ordenarData.length;
+      renderOrdenar();
+    }, 1800);
+  } else {
+    feedback.textContent = '🤔 Ese orden no es correcto. ¡Inténtalo!';
+    feedback.className = 'feedback wrong-msg';
+    playSoundWrong();
+    zone.querySelectorAll('.drag-word').forEach(el => {
+      el.style.animation = 'shake 0.4s ease';
+      setTimeout(() => el.style.animation = '', 400);
+    });
+  }
+}
+
+// ============================================================
+// ACTIVIDAD 4: LEE EN VOZ ALTA
+//
+// NOTA SOBRE PERMISOS:
+// El navegador requiere que el usuario autorice el micrófono.
+// Si el usuario niega el permiso, se muestra un mensaje
+// amigable que explica cómo habilitarlo, en lugar del mensaje
+// técnico predeterminado del sistema.
+// ============================================================
+const vozData = [
+  'El sol sale por la mañana.',
+  'La mariposa vuela sobre la flor.',
+  'Mi perro ladra muy fuerte.',
+  'El niño juega con su pelota.',
+  'Mamá prepara el desayuno.',
+  'El pájaro canta en el árbol.',
+];
+
+let vozIndex = 0;
+let vozScore  = 0;
+let recognition = null;
+let isListening = false;
+
+function initVoz() {
+  vozIndex = 0;
+  renderVoz();
+}
+
+function renderVoz() {
+  document.getElementById('voz-sentence').textContent = vozData[vozIndex];
+  document.getElementById('voz-transcript').textContent = '';
+  document.getElementById('voz-feedback').textContent = '';
+  document.getElementById('voz-feedback').className = 'feedback';
+  document.getElementById('mic-label').textContent = 'Presiona y Lee';
+}
+
+function startListening() {
+  if (isListening) { stopListening(); return; }
+
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SR) {
+    document.getElementById('voz-feedback').textContent =
+      '😕 Tu navegador no admite reconocimiento de voz. Usa Chrome o Edge.';
+    document.getElementById('voz-feedback').className = 'feedback wrong-msg';
+    return;
+  }
+
+  recognition = new SR();
+  recognition.lang = 'es-ES';
+  recognition.interimResults = false;
+  recognition.maxAlternatives = 3;
+
+  recognition.onstart = () => {
+    isListening = true;
+    document.getElementById('mic-btn').classList.add('listening');
+    document.getElementById('mic-label').textContent = 'Escuchando...';
+    document.getElementById('listening-anim').classList.add('show');
+    document.getElementById('voz-transcript').textContent = '🎙️ Escuchando...';
+    document.getElementById('voz-feedback').textContent = '';
+  };
+
+  recognition.onresult = e => {
+    const results  = Array.from(e.results[0]).map(r => r.transcript.toLowerCase().trim());
+    const expected = vozData[vozIndex].toLowerCase().replace(/[.,!?]/g, '').trim();
+
+    document.getElementById('voz-transcript').textContent = '🗣️ Dijiste: "' + results[0] + '"';
+
+    const spokenWords   = results[0].replace(/[.,!?]/g, '').split(' ');
+    const expectedWords = expected.split(' ');
+    const matches = spokenWords.filter(w => expectedWords.includes(w)).length;
+    const similarity = matches / expectedWords.length;
+
+    const feedback = document.getElementById('voz-feedback');
+    if (similarity >= 0.6) {
+      feedback.textContent = '🌟 ¡Muy bien! ¡Excelente lectura!';
+      feedback.className = 'feedback correct-msg';
+      playSoundCorrect();
+      vozScore += 10;
+      document.getElementById('voz-score').textContent = vozScore;
+      updateStars(1);
+    } else {
+      feedback.textContent = '😊 ¡Inténtalo otra vez! Puedes hacerlo.';
+      feedback.className = 'feedback wrong-msg';
+    }
+    stopListening();
+  };
+
+  recognition.onerror = e => {
+    const feedback = document.getElementById('voz-feedback');
+    feedback.className = 'feedback wrong-msg';
+
+    // Mensajes amigables según el tipo de error
+    if (e.error === 'no-speech') {
+      feedback.textContent = '🔇 No te escuché. ¡Habla más fuerte y cerca!';
+    } else if (e.error === 'not-allowed' || e.error === 'permission-denied') {
+      // Explica cómo habilitar el micrófono sin mensajes técnicos
+      feedback.textContent = '🎙️ Necesito usar tu micrófono. Busca el ícono 🔒 en la barra del navegador y activa el micrófono.';
+    } else if (e.error === 'network') {
+      feedback.textContent = '📶 Revisa tu conexión a internet e intenta de nuevo.';
+    } else {
+      feedback.textContent = '⚠️ No pude escucharte. ¡Intenta de nuevo!';
+    }
+    stopListening();
+  };
+
+  recognition.onend = () => stopListening();
+
+  // Intenta iniciar – si hay error de permisos se captura en onerror
+  try { recognition.start(); } catch(err) {
+    document.getElementById('voz-feedback').textContent =
+      '⚠️ No se pudo iniciar el micrófono. Intenta de nuevo.';
+    document.getElementById('voz-feedback').className = 'feedback wrong-msg';
+    stopListening();
+  }
+}
+
+function stopListening() {
+  isListening = false;
+  if (recognition) { try { recognition.stop(); } catch(e) {} }
+  document.getElementById('mic-btn').classList.remove('listening');
+  document.getElementById('mic-label').textContent = 'Presiona y Lee';
+  document.getElementById('listening-anim').classList.remove('show');
+}
+
+function nextVozQuestion() {
+  vozIndex = (vozIndex + 1) % vozData.length;
+  renderVoz();
+}
+
+// ============================================================
+// ACTIVIDAD 5: ABECEDARIO
+// ============================================================
+const alphabet = [
+  { letter: 'A', emoji: '🌳', word: 'Árbol' },
+  { letter: 'B', emoji: '⛵', word: 'Barco' },
+  { letter: 'C', emoji: '🏠', word: 'Casa' },
+  { letter: 'D', emoji: '🦷', word: 'Diente' },
+  { letter: 'E', emoji: '🐘', word: 'Elefante' },
+  { letter: 'F', emoji: '🌸', word: 'Flor' },
+  { letter: 'G', emoji: '🐱', word: 'Gato' },
+  { letter: 'H', emoji: '🧵', word: 'Hilo' },
+  { letter: 'I', emoji: '🏝️', word: 'Isla' },
+  { letter: 'J', emoji: '🦒', word: 'Jirafa' },
+  { letter: 'K', emoji: '🥝', word: 'Kiwi' },
+  { letter: 'L', emoji: '🦁', word: 'León' },
+  { letter: 'M', emoji: '🤚', word: 'Mano' },
+  { letter: 'N', emoji: '🍊', word: 'Naranja' },
+  { letter: 'Ñ', emoji: '🥜', word: 'Ñame' },
+  { letter: 'O', emoji: '🐑', word: 'Oveja' },
+  { letter: 'P', emoji: '🍞', word: 'Pan' },
+  { letter: 'Q', emoji: '🧀', word: 'Queso' },
+  { letter: 'R', emoji: '🐸', word: 'Rana' },
+  { letter: 'S', emoji: '🌞', word: 'Sol' },
+  { letter: 'T', emoji: '🐢', word: 'Tortuga' },
+  { letter: 'U', emoji: '🍇', word: 'Uvas' },
+  { letter: 'V', emoji: '🐮', word: 'Vaca' },
+  { letter: 'W', emoji: '🍉', word: 'Wafle' },
+  { letter: 'X', emoji: '🪗', word: 'Xilófono' },
+  { letter: 'Y', emoji: '🌿', word: 'Yerba' },
+  { letter: 'Z', emoji: '🦊', word: 'Zorro' },
+];
+
+let abcIndex = 0;
+
+function initAbc() { renderAbc(); }
+
+function renderAbc() {
+  const data = alphabet[abcIndex];
+  const letterEl = document.getElementById('abc-letter');
+  const emojiEl  = document.getElementById('abc-emoji');
+  const wordEl   = document.getElementById('abc-word');
+
+  letterEl.style.animation = 'none';
+  emojiEl.style.animation  = 'none';
+  requestAnimationFrame(() => {
+    letterEl.style.animation = 'letterBounce 0.4s ease';
+    emojiEl.style.animation  = 'fadeSlideIn 0.3s ease';
+  });
+
+  letterEl.textContent = data.letter;
+  emojiEl.textContent  = data.emoji;
+  wordEl.textContent   = data.word;
+  renderAbcDots();
+}
+
+function renderAbcDots() {
+  const container = document.getElementById('abc-dots');
+  container.innerHTML = '';
+  alphabet.forEach((_, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'abc-dot' + (i === abcIndex ? ' active' : '');
+    dot.onclick = () => { abcIndex = i; renderAbc(); };
+    container.appendChild(dot);
+  });
+}
+
+function speakLetter() {
+  const data = alphabet[abcIndex];
+  speak(data.letter + '... ' + data.word);
+  const el = document.getElementById('abc-letter');
+  el.style.transform = 'scale(1.2) rotate(5deg)';
+  setTimeout(() => el.style.transform = '', 400);
+}
+
+function nextLetter() {
+  abcIndex = (abcIndex + 1) % alphabet.length;
+  renderAbc();
+  speakLetter();
+}
+
+function prevLetter() {
+  abcIndex = (abcIndex - 1 + alphabet.length) % alphabet.length;
+  renderAbc();
+  speakLetter();
+}
+
+</script>
+</body>
+</html>
