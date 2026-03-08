@@ -189,6 +189,9 @@ const completaData = [
   { before: 'lo',  blank: 'bo',  after: '',     options: ['bo','to','co'], hint: '¿Con qué sílaba termina?' },
 ];
 
+// Las opciones se mezclan UNA SOLA VEZ al cargar, y se guardan así permanentemente
+completaData.forEach(q => { q.options = shuffle(q.options); });
+
 let completaIndex = 0;
 let completaScore = 0;
 
@@ -233,7 +236,7 @@ function renderCompleta() {
   // Instrucción
   document.getElementById('completa-instruction').textContent = q.hint;
 
-  // Opciones
+  // Opciones (ya mezcladas permanentemente al inicio)
   const container = document.getElementById('completa-options');
   container.innerHTML = '';
   q.options.forEach(opt => {
@@ -304,6 +307,9 @@ const oracionData = [
   { sentence: 'El bebé duerme en su ______.', correct: 'cama',    options: ['cama', 'árbol', 'correr'] },
   { sentence: 'Papá lee un ______.', correct: 'libro',   options: ['libro', 'agua', 'feliz'] },
 ];
+
+// Las opciones se mezclan UNA SOLA VEZ al cargar
+oracionData.forEach(q => { q.options = shuffle(q.options); });
 
 let oracionIndex = 0;
 let oracionScore  = 0;
