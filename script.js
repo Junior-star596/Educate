@@ -10,6 +10,16 @@ const state = {
   totalStars: 0,
 };
 
+// Función shuffle disponible desde el inicio para poder usarla en los datos
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
 // ============================================================
 // PANTALLA DE BIENVENIDA
 // ============================================================
@@ -397,15 +407,6 @@ let ordenarIndex = 0;
 let ordenarScore  = 0;
 let currentOrdenar = null;
 let draggedEl = null;
-
-function shuffle(arr) {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
-}
 
 function initOrdenar() { renderOrdenar(); }
 
